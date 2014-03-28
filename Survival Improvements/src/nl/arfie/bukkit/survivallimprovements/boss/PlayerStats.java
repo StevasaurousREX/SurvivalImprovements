@@ -1,8 +1,11 @@
-package nl.arfie.bukkit.survivalimprovements;
+package nl.arfie.bukkit.survivallimprovements.boss;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+
+import nl.arfie.bukkit.survivalimprovements.Config;
+import nl.arfie.bukkit.survivalimprovements.SurvivalImprovements;
 
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;

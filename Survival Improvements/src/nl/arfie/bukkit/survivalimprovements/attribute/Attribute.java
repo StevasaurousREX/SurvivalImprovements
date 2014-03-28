@@ -1,4 +1,4 @@
-package nl.arfie.bukkit.survivalimprovements;
+package nl.arfie.bukkit.survivalimprovements.attribute;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

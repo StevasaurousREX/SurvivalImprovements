@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import java.util.HashSet;
 
 import net.ess3.api.Economy;
+import nl.arfie.bukkit.survivallimprovements.boss.Boss;
+import nl.arfie.bukkit.survivallimprovements.boss.PlayerStats;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;

@@ -1,4 +1,7 @@
-package nl.arfie.bukkit.survivalimprovements;
+package nl.arfie.bukkit.survivallimprovements.boss;
+
+import nl.arfie.bukkit.survivalimprovements.attribute.Attribute;
+import nl.arfie.bukkit.survivalimprovements.attribute.AttributeList;
 
 import org.bukkit.Color;
 import org.bukkit.Material;

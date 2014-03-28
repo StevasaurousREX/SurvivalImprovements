@@ -1,4 +1,4 @@
-package nl.arfie.bukkit.survivalimprovements;
+package nl.arfie.bukkit.survivalimprovements.attribute;
 
 import java.util.HashMap;
 import java.util.HashSet;

@@ -1,5 +1,8 @@
 package nl.arfie.bukkit.survivalimprovements;
 
+import nl.arfie.bukkit.survivallimprovements.boss.Boss;
+import nl.arfie.bukkit.survivallimprovements.boss.PlayerStats;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

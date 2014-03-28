@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nl.arfie.bukkit.survivalimprovements.attribute.Attribute;
+import nl.arfie.bukkit.survivalimprovements.attribute.AttributeList;
+import nl.arfie.bukkit.survivallimprovements.boss.Boss;
+import nl.arfie.bukkit.survivallimprovements.boss.Equipment;
+
 import com.comphenix.example.Attributes;
 
 import org.bukkit.ChatColor;

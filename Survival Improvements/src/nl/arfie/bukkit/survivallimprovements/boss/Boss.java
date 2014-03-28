@@ -1,9 +1,11 @@
-package nl.arfie.bukkit.survivalimprovements;
+package nl.arfie.bukkit.survivallimprovements.boss;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+import nl.arfie.bukkit.survivalimprovements.Config;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
