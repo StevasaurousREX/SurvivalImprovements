@@ -1,0 +1,13 @@
+#Survival Improvements Messages file
+
+#Gravestones
+gravestone-spawned: '&8A gravestone was created where you died. If you break that, you will safely retrieve your items.'
+gravestone-timer: '&8The gravestone will automatically be destroyed in &c5&8 minutes.'
+gravestone-toolate: '&cYour gravestone has automatically been broken.'
+
+#Bosses
+boss-encounter: 'You have encountered a $BOSS!'
+boss-defeat: '$PLAYER has killed a $BOSS and received $MONEY gold!'
+
+#Misc
+reload: 'Reloaded.'

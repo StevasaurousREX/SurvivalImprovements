@@ -1,0 +1,352 @@
+##############################################
+#Survival Improvements Plugin by Ruud Verbeek#
+#Configuration                               #
+##############################################
+#Thanks to ComPhenix for the Attributes API  #
+##############################################
+
+
+#1. Global
+
+#Should the plugin only work for specific worlds?
+world-specific: false
+
+#If so, which worlds are those?
+worlds:
+  - world
+  - world_nether
+  - world_the_end
+
+
+#2. Gravestones
+
+#Should players leave a gravestone when they die?
+enable-gravestone: true
+
+#Time before a gravestone automatically breaks (in seconds)
+gravestone-time: 300
+
+#Format of the player's name on the gravestone
+gravestone-playerformat: '&1'
+
+
+#3. Money (currently hooked with Essentials)
+
+#Should money be earned by killing mobs?
+mobs-money: true
+
+#Should a sound be played when a player gets money by killing?
+mobs-money-sound: true
+
+#How much money should you get from mobs?
+mobs-money-amount:
+  zombie: 25
+  skeleton: 25
+  creeper: 25
+  spider: 20
+  cave_spider: 25
+  slime: 25
+  enderman: 30
+  pig_zombie: 30
+  ghast: 35
+  magma_cube: 30
+  blaze: 30
+  cow: 1
+  sheep: 1
+  chicken: 1
+  pig: 1
+  squid: 1
+  horse: 1
+
+#Should you get money from killing mobs in the End?
+#This will make Enderman farms less OP
+mobs-money-not-in-end: true
+
+#Should players lose money by dying?
+lose-money-on-death: true
+
+#How much of their money should they lose? (percentage, 0.0 = 0%, 1.0 = 100%)
+money-loss-on-death: 0.05
+
+#Should money loss be announced in death messages?
+show-money-loss-in-death-messages: true
+
+#How should the money loss be shown? $MESSAGE = the original death message, $LOSS = the amount of money lost.
+money-loss-chat-format: '$MESSAGE and lost &c$LOSS&f gold!'
+
+#Should get players get money by killing other players?
+#This only works if lose-money-on-death is set to true
+money-from-killing: true
+
+#How much of the lost money should players get from killing? This is a percentage of the by the other player lost money (0.0 = 0%, 1.0 = 100%)
+money-from-killing-amount: 0.5
+
+
+#3. Bosses
+
+#Note: for testing purposes, people with the permission survivalimprovements.spawnbosses can use the /boss command to spawn a boss manually
+
+#Should bosses spawn naturally?
+bosses-spawn: true
+
+#Should bosses spawn when a spawner is broken?
+bosses-from-spawners: true
+
+#Which types of bosses should spawn? Currently, only zombie, skeleton, spider and blaze are available
+boss-types:
+  zombie: true
+  skeleton: true
+  spider: true
+  blaze: true
+
+#Should the number of kills on the mob type be tracked to calculate the boss's level?
+#If not, bosses will always be level 3 and the level will not be shown.
+enable-boss-levels: true
+
+#How many mob kills should you have to get a specific boss level?
+#Ignored if enable-boss-levels is set to false.
+boss-level-scale:
+  1: 0
+  2: 10
+  3: 25
+  4: 50
+  5: 90
+  6: 150
+  7: 225
+  8: 325
+  9: 450
+  10: 600
+
+#Name tags of bosses
+boss-name-tags:
+  zombie: '&2&lZombie Boss'
+  skeleton: '&7&lSkeleton Boss'
+  spider: '&3&lSpider Boss'
+  blaze: '&6&lBlaze Boss'
+
+#What kind of gear should bosses drop?
+#$LEVEL is the level of the gear
+#Enchants are specified based on level
+#Possible enchants are listed at http://jd.bukkit.org/rb/apidocs/org/bukkit/enchantments/Enchantment.html and venom_aspect is also available.
+#Possible attributes:
+# - knockback_resistance (0.0 means no resistance, 1.0 means full resistance)
+# - movement_speed       (0.0 means 0% increase, 1.0 means 100% increase)
+# - max_health           (in half hearts)
+# - attack_damage        (in half hearts)
+# - follow_range         (in blocks, only applied on tracking mobs so not very useful)
+boss-gear:
+  zombie:
+    sword:
+      enabled: true
+      material: iron
+      name: '&5Level $LEVEL Zombie Sword'
+      lore: 'Obtained by killing a Zombie Boss'
+      enchants:
+        damage_all:
+          1: 1
+          2: 2
+          3: 3
+          4: 3
+          5: 4
+          6: 4
+          7: 5
+          8: 5
+          9: 6
+          10: 7
+        fire_aspect:
+          4: 1
+          5: 1
+          6: 1
+          7: 2
+          8: 2
+          9: 2
+          10: 3
+        knockback:
+          1: 1
+          2: 1
+          3: 1
+          4: 2
+          5: 2
+          6: 2
+          7: 2
+          8: 3
+          9: 3
+          10: 3
+        loot_bonus_mobs:
+          2: 1
+          3: 1
+          4: 1
+          5: 2
+          6: 2
+          7: 2
+          8: 3
+          9: 3
+          10: 4
+    armor:
+      enabled: true
+      name: '&5Level $LEVEL Zombie Armour'
+      lore: 'Obtained by killing a Zombie Boss'
+      enchants:
+        protection_environmental:
+          1: 1
+          2: 1
+          3: 2
+          4: 2
+          5: 3
+          6: 3
+          7: 4
+          8: 4
+          9: 5
+          10: 5
+  skeleton:
+    bow:
+      enabled: true
+      name: '&5Level $LEVEL Skeleton Bow'
+      lore: 'Obtained by killing a Skeleton Boss'
+      enchants:
+        arrow_damage:
+          1: 1
+          2: 1
+          3: 2
+          4: 2
+          5: 3
+          6: 3
+          7: 4
+          8: 4
+          9: 5
+          10: 6
+        flame:
+          4: 1
+          5: 1
+          6: 1
+          7: 1
+          8: 1
+          9: 1
+          10: 1
+        punch:
+          1: 1
+          2: 1
+          3: 1
+          4: 2
+          5: 2
+          6: 2
+          7: 2
+          8: 3
+          9: 3
+          10: 3
+        infinity:
+          4: 1
+          5: 1
+          6: 1
+          7: 1
+          8: 1
+          9: 1
+          10: 1
+    armor:
+      enabled: true
+      name: '&5Level $LEVEL Skeleton Helmet'
+      lore: 'Obtained by killing a Skeleton Boss'
+      knockback_resistance:
+        1: 0.1
+        2: 0.2
+        3: 0.3
+        4: 0.4
+        5: 0.5
+        6: 0.6
+        7: 0.7
+        8: 0.8
+        9: 0.9
+        10: 1.0
+  spider:
+    sword:
+      enabled: true
+      material: wood
+      name: '&5Level $LEVEL Spider Sword'
+      lore: 'Obtained by killing a Spider Boss'
+      enchants:
+        venom_aspect:
+          1: 1
+          2: 1
+          3: 1
+          4: 1
+          5: 1
+          6: 1
+          7: 2
+          8: 2
+          9: 2
+          10: 2
+    armor:
+      enabled: true
+      name: '&5Level $LEVEL Spider Legs'
+      lore: 'Obtained by killing a Spider Boss'
+      movement_speed:
+        1: 0.1
+        2: 0.15
+        3: 0.25
+        4: 0.3
+        5: 0.35
+        6: 0.45
+        7: 0.5
+        8: 0.55
+        9: 0.65
+        10: 0.75
+  blaze:
+    sword:
+      enabled: true
+      material: wood
+      name: '&5Level $LEVEL Blazing Sword'
+      lore: 'Obtained by killing a Blaze Boss'
+      enchants:
+        fire_aspect:
+          1: 1
+          2: 1
+          3: 1
+          4: 2
+          5: 2
+          6: 2
+          7: 3
+          8: 3
+          9: 3
+          10: 4
+    armor:
+      enabled: true
+      name: '&5Level $LEVEL Blazing Boots'
+      lore: 'Obtained by killing a Blaze Boss'
+      max_health:
+        1: 2
+        2: 4
+        3: 6
+        4: 8
+        5: 10
+        6: 12
+        7: 14
+        8: 16
+        9: 18
+        10: 20
+
+#Should bosses give money on death?
+#This overrides the mobs-money setting.
+boss-money: true
+
+#How much money should bosses give?
+boss-money-amount:
+  1: 50
+  2: 100
+  3: 250
+  4: 500
+  5: 1000
+  6: 2500
+  7: 5000
+  8: 10000
+  9: 12500
+  10: 15000
+
+#Should encountering a boss via a spawner be announced to the player?
+announce-encountering: true
+#The encountering message can be set in messages.yml
+
+#Should killing a boss be announced to everyone on the server?
+broadcast-boss-kill: true
+#This message can also be set in messages.yml
+
+#END OF FILE

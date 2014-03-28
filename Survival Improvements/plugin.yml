@@ -1,0 +1,28 @@
+name: Survival Improvements
+main: nl.arfie.bukkit.survivalimprovements.SurvivalImprovements
+version: 1.0
+author: Ruud Verbeek
+
+commands:
+  boss:
+    description: Summons a boss
+    usage: /<command> <type> <level>
+    permission: survivalimprovements.spawnbosses
+  sireload:
+    description: Reloads the plugin
+    permission: survivalimprovements.reload
+  sistats:
+    description: Show a player's stats
+    permission: survivalimprovements.stats
+  attribute:
+    description: Add an attribute to an item
+    permission: survivalimprovements.attribute
+
+permissions:
+  survivalimprovements.*:
+    default: op
+    children:
+      survivalimprovements.spawnbosses: true
+      survivalimprovements.reload: true
+      survivalimprovements.stats: true
+      survivalimprovements.attribute: true
