@@ -3,8 +3,6 @@ main: nl.arfie.bukkit.survivalimprovements.SurvivalImprovements
 version: 1.0
 author: Ruud Verbeek
 
-softdepend: [Essentials]
-
 commands:
   boss:
     description: Summons a boss

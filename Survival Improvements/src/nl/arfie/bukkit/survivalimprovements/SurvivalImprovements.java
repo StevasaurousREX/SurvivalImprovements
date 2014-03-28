@@ -1,7 +1,7 @@
 package nl.arfie.bukkit.survivalimprovements;
 
 import nl.arfie.bukkit.survivalimprovements.boss.Boss;
-import nl.arfie.bukkit.survivalimprovements.boss.PlayerStats;
+import nl.arfie.bukkit.survivalimprovements.economy.PlayerStats;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -20,12 +20,6 @@ public class SurvivalImprovements extends JavaPlugin {
 	private static SurvivalImprovements inst;
 
 	public void onEnable(){
-		if(!Bukkit.getPluginManager().isPluginEnabled("Essentials")){
-			getLogger().info("[Fatal error] This plugin requires Essentials to run. Please add and reload.");
-			Bukkit.getPluginManager().disablePlugin(this);
-			return;
-		}
-		
 		Bukkit.getPluginManager().registerEvents(new SIListeners(),this);
 		inst=this;
 		Config.loadFromFile();

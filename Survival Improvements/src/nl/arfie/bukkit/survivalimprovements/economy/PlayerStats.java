@@ -1,4 +1,4 @@
-package nl.arfie.bukkit.survivalimprovements.boss;
+package nl.arfie.bukkit.survivalimprovements.economy;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,35 +15,35 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class PlayerStats {
 
 	public enum Type {
-		ZOMBIE_KILLS, SKELETON_KILLS, SPIDER_KILLS, BLAZE_KILLS, PLAYER_KILLS;
+		ZOMBIE_KILLS, SKELETON_KILLS, SPIDER_KILLS, BLAZE_KILLS, PLAYER_KILLS, MONEY;
 	}
 	
 	private static HashMap<String, PlayerStats> map = new HashMap<String, PlayerStats>();
 	
-	private HashMap<Type, Integer> data;
-	private String player;
+	private HashMap<Type, Double> data;
+	public String player;
 	
 	public static File file = new File(SurvivalImprovements.instance().getDataFolder(),"players.yml");
 	
 	private PlayerStats(String name){
 		player=name;
-		data = new HashMap<Type, Integer>();
+		data = new HashMap<Type, Double>();
 		map.put(name,this);
 	}
 	
-	public void setData(Type t, int val, boolean save){
+	public void setData(Type t, double val, boolean save){
 		data.put(t,val);
 		if(save)
 			save(file);
 	}
 	
-	public void addData(Type t, int val, boolean save){
+	public void addData(Type t, double val, boolean save){
 		data.put(t,getData(t)+val);
 		if(save)
 			save(file);
 	}
 	
-	public int getData(Type t){
+	public double getData(Type t){
 		if(data.containsKey(t))return data.get(t);
 		return 0;
 	}
@@ -52,7 +52,7 @@ public class PlayerStats {
 		return data.toString();
 	}
 	
-	//STATIC//
+	//STATIC
 	
 	public static void load(File file){
 		map.clear();
@@ -62,7 +62,7 @@ public class PlayerStats {
 			PlayerStats ps = new PlayerStats(s);
 			ConfigurationSection sect = conf.getConfigurationSection(s);
 			for(String s2 : sect.getValues(false).keySet()){
-				ps.setData(Type.valueOf(s2),(int)sect.getValues(false).get(s2),false);
+				ps.setData(Type.valueOf(s2),(int)sect.get(s2),false);
 			}
 		}
 	}
