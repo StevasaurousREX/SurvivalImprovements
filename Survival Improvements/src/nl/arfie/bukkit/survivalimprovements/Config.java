@@ -8,8 +8,8 @@ import java.util.Map;
 
 import nl.arfie.bukkit.survivalimprovements.attribute.Attribute;
 import nl.arfie.bukkit.survivalimprovements.attribute.AttributeList;
-import nl.arfie.bukkit.survivallimprovements.boss.Boss;
-import nl.arfie.bukkit.survivallimprovements.boss.Equipment;
+import nl.arfie.bukkit.survivalimprovements.boss.Boss;
+import nl.arfie.bukkit.survivalimprovements.boss.Equipment;
 
 import com.comphenix.example.Attributes;
 

@@ -1,4 +1,4 @@
-package nl.arfie.bukkit.survivallimprovements.boss;
+package nl.arfie.bukkit.survivalimprovements.boss;
 
 import nl.arfie.bukkit.survivalimprovements.attribute.Attribute;
 import nl.arfie.bukkit.survivalimprovements.attribute.AttributeList;

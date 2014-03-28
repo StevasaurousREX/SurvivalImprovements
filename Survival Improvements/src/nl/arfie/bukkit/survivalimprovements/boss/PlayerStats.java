@@ -1,4 +1,4 @@
-package nl.arfie.bukkit.survivallimprovements.boss;
+package nl.arfie.bukkit.survivalimprovements.boss;
 
 import java.io.File;
 import java.io.IOException;
