@@ -17,6 +17,12 @@ public class SurvivalImprovements extends JavaPlugin {
 	private static SurvivalImprovements inst;
 
 	public void onEnable(){
+		if(!Bukkit.getPluginManager().isPluginEnabled("Essentials")){
+			getLogger().info("[Fatal error] This plugin requires Essentials to run. Please add and reload.");
+			Bukkit.getPluginManager().disablePlugin(this);
+			return;
+		}
+		
 		Bukkit.getPluginManager().registerEvents(new SIListeners(),this);
 		inst=this;
 		Config.loadFromFile();
