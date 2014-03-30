@@ -62,7 +62,7 @@ public class PlayerStats {
 			PlayerStats ps = new PlayerStats(s);
 			ConfigurationSection sect = conf.getConfigurationSection(s);
 			for(String s2 : sect.getValues(false).keySet()){
-				ps.setData(Type.valueOf(s2),(int)sect.get(s2),false);
+				ps.setData(Type.valueOf(s2),(double)sect.get(s2),false);
 			}
 		}
 	}
