@@ -1,20 +1,16 @@
 package nl.arfie.bukkit.survivalimprovements.boss;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
 import nl.arfie.bukkit.survivalimprovements.Config;
+import nl.arfie.bukkit.survivalimprovements.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
@@ -24,10 +20,11 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
 import com.comphenix.example.Attributes;
-import com.earth2me.essentials.api.Economy;
-import com.earth2me.essentials.api.NoLoanPermittedException;
-import com.earth2me.essentials.api.UserDoesNotExistException;
 
 public class Boss {
 
@@ -100,11 +97,7 @@ public class Boss {
 			int money=Config.BOSS_MONEY_AMOUNT.get(level);
 //			Bukkit.broadcastMessage(p.getDisplayName()+" has killed a §llevel "+(level+1)+" "+type.tag+"§f§r and received §c"+money+"§f gold!");
 			Bukkit.broadcastMessage(Config.MESSAGE_BOSS_DEFEAT.replaceAll("\\$PLAYER",p.getDisplayName()).replaceAll("\\$BOSS",(Config.ENABLE_BOSS_LEVELS?"level "+(level+1)+" ":"")+Config.BOSS_NAME_TAGS.get(type)).replaceAll("\\$MONEY",""+money));
-			try {
-				Economy.add(p.getName(),new BigDecimal(money));
-			} catch (NoLoanPermittedException | UserDoesNotExistException ex) {
-				ex.printStackTrace();
-			}
+			Economy.addMoney(p.getName(),money);
 		}
 		bosses.remove(this);
 	}
