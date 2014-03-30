@@ -49,11 +49,8 @@ public class GraveStone {
 		sign.update();
 	}
 	
-	public void _break(boolean remove, boolean brk){
-		if(brk){
-			loc.getBlock().getDrops().clear();
-			loc.getBlock().breakNaturally();
-		}
+	public void _break(boolean remove){
+		loc.getBlock().setType(Material.AIR);
 		Bukkit.getScheduler().cancelTask(timer);
 		for(ItemStack is : contents){
 			loc.getWorld().dropItem(loc,is);
@@ -61,10 +58,6 @@ public class GraveStone {
 		
 		if(remove)
 			stones.remove(this);
-	}
-	
-	public void _break(boolean remove){
-		_break(remove,true);
 	}
 	
 	public static void breakAll(){

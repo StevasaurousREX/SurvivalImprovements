@@ -1,7 +1,8 @@
 package nl.arfie.bukkit.survivalimprovements;
 
-import nl.arfie.bukkit.survivalimprovements.economy.Economy;
 import nl.arfie.bukkit.survivalimprovements.boss.Boss;
+import nl.arfie.bukkit.survivalimprovements.economy.Economy;
+import nl.arfie.bukkit.survivalimprovements.economy.Market;
 import nl.arfie.bukkit.survivalimprovements.economy.PlayerStats;
 
 import org.bukkit.Effect;
@@ -23,6 +24,7 @@ import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -81,11 +83,10 @@ public class SIListeners implements Listener {
 		Block block = e.getBlock();
 		GraveStone gravestone = GraveStone.getGravestone(block);
 		if(gravestone!=null){
-			if(e.getPlayer().isOp()||e.getPlayer().equals(gravestone.getPlayer())){
-				gravestone._break(true,false);
-				block.getDrops().clear();
-			} else
 			e.setCancelled(true);
+			if(e.getPlayer().isOp()||e.getPlayer().equals(gravestone.getPlayer())){
+				gravestone._break(true);
+			}
 		} else if(e.getBlock().getType()==Material.MOB_SPAWNER) try {
 			CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
 			Boss.Type bossType = null; int bossLevel=0;
@@ -211,6 +212,11 @@ public class SIListeners implements Listener {
 			if(Config.isValidWorld(e.getEntity().getWorld(),false) && Config.MOB_MONEY)
 				Economy.addMoney(p.getName(),m);
 		}
+	}
+	
+	@EventHandler
+	public void invClick(InventoryClickEvent e){
+		Market.invClick(e);
 	}
 	
 }
