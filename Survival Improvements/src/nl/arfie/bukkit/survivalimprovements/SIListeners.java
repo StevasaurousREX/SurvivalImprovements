@@ -38,31 +38,19 @@ public class SIListeners implements Listener {
 		
 		Player p = e.getEntity();
 		if(Config.LOSE_MONEY_ON_DEATH){
-//				BigDecimal balance=Economy.getMoneyExact(p.getName());
-//				BigInteger loss=balance.multiply(new BigDecimal(Config.MONEY_LOSS_ON_DEATH)).toBigInteger();
-//				
-//				if(p.getKiller() instanceof Player && Config.PLAYER_KILL_MONEY){
-//					Player k = (Player) p.getKiller();
-//					Economy.add(k.getName(),new BigDecimal(loss.doubleValue()*Config.PLAYER_KILL_MONEY_AMOUNT));
-//				}
-//				
-//				balance=balance.subtract(new BigDecimal(loss.doubleValue()));
-//				Economy.setMoney(p.getName(),balance);
-			double bal = Economy.getBalance(p.getName());
+			double bal = Economy.getBalance(p);
 			double loss= Math.floor(bal*Config.MONEY_LOSS_ON_DEATH);
 			if(p.getKiller() instanceof Player && Config.PLAYER_KILL_MONEY){
 				Player k = (Player) p.getKiller();
-				Economy.addMoney(k.getName(),Math.floor(loss*Config.PLAYER_KILL_MONEY_AMOUNT));
+				Economy.addMoney(k,Math.floor(loss*Config.PLAYER_KILL_MONEY_AMOUNT));
 			}
-			Economy.addMoney(p.getName(),-loss);
-//			e.setDeathMessage(e.getDeathMessage()+" and lost §c"+loss.toString()+"§f gold!");
-			e.setDeathMessage(Config.MONEY_LOSS_MESSAGE.replaceAll("\\$MESSAGE",e.getDeathMessage()).replaceAll("\\$LOSS",""+loss));
+			Economy.addMoney(p,-loss);
+			e.setDeathMessage(Config.MONEY_LOSS_MESSAGE.replaceAll("\\$MESSAGE",e.getDeathMessage()).replaceAll("\\$LOSS",String.format("%.2f",loss)));
 		}
 		
 		//Gravestone
 		
 		if(e.getDrops().size()>0 && Config.GRAVESTONES){
-//				p.sendMessage("§7Find your gravestone and break it within §c5§7 minutes to retrieve your items safely.");
 			p.sendMessage(Config.MESSAGE_GRAVESTONE_SPAWN);
 			p.sendMessage(Config.MESSAGE_GRAVESTONE_TIMER);
 			ItemStack[] drops = new ItemStack[e.getDrops().size()];
@@ -90,7 +78,7 @@ public class SIListeners implements Listener {
 		} else if(e.getBlock().getType()==Material.MOB_SPAWNER) try {
 			CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
 			Boss.Type bossType = null; int bossLevel=0;
-			PlayerStats ps = PlayerStats.statsFor(e.getPlayer().getName());
+			PlayerStats ps = PlayerStats.statsFor(e.getPlayer());
 			switch(spawner.getSpawnedType()){
 				case ZOMBIE: bossType=Boss.Type.ZOMBIE; bossLevel=PlayerStats.getLevelByStat((int)ps.getData(PlayerStats.Type.ZOMBIE_KILLS)); break;
 				case SKELETON: bossType=Boss.Type.SKELETON; bossLevel=PlayerStats.getLevelByStat((int)ps.getData(PlayerStats.Type.SKELETON_KILLS));  break;
@@ -101,7 +89,6 @@ public class SIListeners implements Listener {
 				bossLevel=2;
 			if(bossType!=null && Config.BOSSES_SPAWNING && Config.BOSSES_FROM_SPAWNERS && Config.BOSS_TYPES_SPAWNING.get(bossType)){
 				Boss boss = Boss.create(e.getBlock().getLocation(),bossLevel,bossType);
-//				e.getPlayer().sendMessage("You have encountered a §llevel "+(boss.level+1)+" "+boss.type.tag+"§f§r!");
 				e.getPlayer().sendMessage(Config.MESSAGE_BOSS_ENCOUNTER.replaceAll("\\$BOSS",(Config.ENABLE_BOSS_LEVELS?"§llevel "+(boss.level+1)+" ":"")+Config.BOSS_NAME_TAGS.get(boss.type)));
 				e.getBlock().getWorld().playEffect(e.getBlock().getLocation(),Effect.MOBSPAWNER_FLAMES,0);
 			}
@@ -160,16 +147,8 @@ public class SIListeners implements Listener {
 		LivingEntity le = e.getEntity();
 		Player p = le.getKiller();
 		if(p!=null){
-			PlayerStats stats = PlayerStats.statsFor(p.getName());
+			PlayerStats stats = PlayerStats.statsFor(p);
 			double m=0.0;
-//				switch(le.getType()){
-//					case ZOMBIE: case SKELETON: case SPIDER: case CREEPER: m=15.0; break;
-//					case ENDERMAN: case CAVE_SPIDER: case PIG_ZOMBIE: case SLIME: m=20.0; break;
-//					case BLAZE: case MAGMA_CUBE: case WITCH: m=25.0; break;
-//					case GHAST: m=30.0; break;
-//					
-//					case PIG: case SHEEP: case COW: case CHICKEN: case MUSHROOM_COW: case SQUID: m=1.0; break;
-//				}
 			
 			if(Config.MOB_MONEY_AMOUNTS.containsKey(le.getType()) && Config.MOB_MONEY)
 				m=Config.MOB_MONEY_AMOUNTS.get(le.getType());
@@ -210,7 +189,7 @@ public class SIListeners implements Listener {
 			}
 
 			if(Config.isValidWorld(e.getEntity().getWorld(),false) && Config.MOB_MONEY)
-				Economy.addMoney(p.getName(),m);
+				Economy.addMoney(p,m);
 		}
 	}
 	

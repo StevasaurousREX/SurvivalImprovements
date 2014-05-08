@@ -1,20 +1,21 @@
 package nl.arfie.bukkit.survivalimprovements.attribute;
 
+import nl.arfie.bukkit.attributes.Attribute;
+import nl.arfie.bukkit.attributes.AttributeList;
+
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-import com.comphenix.example.Attributes;
-
-public class Attribute {
+public class ItemAttribute {
 	private Type type;
 	private Enchantment enchant;
-	private Attributes.Attribute attribute;
+	private Attribute attribute;
 	private int enchantLevel;
 	
-	public Attribute(Type type, Enchantment enchant, Attributes.Attribute attribute, int enchantLevel){
+	public ItemAttribute(Type type, Enchantment enchant, Attribute attribute, int enchantLevel){
 		this.type=type;
 		this.enchant=enchant;
 		this.attribute=attribute;
@@ -45,10 +46,10 @@ public class Attribute {
 				break;
 		}
 		is.setItemMeta(meta);
-		Attributes attr = new Attributes(is);
+		AttributeList list = new AttributeList();
 		if(type==Type.ATTRIBUTE){
-			attr.add(attribute);
-			is=attr.getStack();
+			list.add(attribute);
+			is=list.apply(is,false);
 		}
 		return is;
 	}

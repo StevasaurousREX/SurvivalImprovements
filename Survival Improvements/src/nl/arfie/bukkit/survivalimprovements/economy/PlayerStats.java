@@ -1,16 +1,18 @@
 package nl.arfie.bukkit.survivalimprovements.economy;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-
 import nl.arfie.bukkit.survivalimprovements.Config;
 import nl.arfie.bukkit.survivalimprovements.SurvivalImprovements;
+import nl.arfie.bukkit.survivalimprovements.util.Util;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class PlayerStats {
 
@@ -25,10 +27,10 @@ public class PlayerStats {
 	
 	public static File file = new File(SurvivalImprovements.instance().getDataFolder(),"players.yml");
 	
-	private PlayerStats(String name){
-		player=name;
+	private PlayerStats(String id){
+		player=id;
 		data = new HashMap<Type, Double>();
-		map.put(name,this);
+		map.put(id,this);
 	}
 	
 	public void setData(Type t, double val, boolean save){
@@ -84,13 +86,6 @@ public class PlayerStats {
 	}
 	
 	public static int getLevelByStat(int stat){
-//		int l=0,s=10,x=10;
-//		while(stat>=x){
-//			s+=10;
-//			x+=s;
-//			++l;
-//		}
-//		return l;
 		int l=0;
 		for(int i=0; Config.LEVEL_SCALE.containsKey(i); ++i){
 			if(stat>=Config.LEVEL_SCALE.get(i))
@@ -101,10 +96,10 @@ public class PlayerStats {
 		return l;
 	}
 	
-	public static PlayerStats statsFor(String player){
-		if(map.containsKey(player))
-			return map.get(player);
-		return new PlayerStats(player);
+	public static PlayerStats statsFor(OfflinePlayer player){
+		if(map.containsKey(Util.getPlayerIdentifier(player)))
+			return map.get(Util.getPlayerIdentifier(player));
+		return new PlayerStats(Util.getPlayerIdentifier(player));
 	}
 	
 }

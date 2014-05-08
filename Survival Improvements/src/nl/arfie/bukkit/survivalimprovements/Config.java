@@ -1,17 +1,13 @@
 package nl.arfie.bukkit.survivalimprovements;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import nl.arfie.bukkit.survivalimprovements.attribute.Attribute;
-import nl.arfie.bukkit.survivalimprovements.attribute.AttributeList;
+import nl.arfie.bukkit.attributes.Attribute;
+import nl.arfie.bukkit.attributes.AttributeType;
+import nl.arfie.bukkit.attributes.Operation;
+import nl.arfie.bukkit.survivalimprovements.attribute.ItemAttribute;
+import nl.arfie.bukkit.survivalimprovements.attribute.ItemAttributeList;
 import nl.arfie.bukkit.survivalimprovements.boss.Boss;
 import nl.arfie.bukkit.survivalimprovements.boss.Equipment;
-
-import com.comphenix.example.Attributes;
+import nl.arfie.bukkit.survivalimprovements.util.Util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -22,6 +18,12 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Config {
 
@@ -101,132 +103,130 @@ public class Config {
 	public static HashMap<Boss.Type, Equipment> BOSS_GEAR = new HashMap<Boss.Type, Equipment>();
 	static {
 		Equipment zombie = new Equipment();
-		AttributeList azombiesword = new AttributeList();
-		azombiesword.add(0,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,1));
-		azombiesword.add(1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,2));
-		azombiesword.add(2,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,3));
-		azombiesword.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,3));
-		azombiesword.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,4));
-		azombiesword.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,4));
-		azombiesword.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,5));
-		azombiesword.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,5));
-		azombiesword.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,6));
-		azombiesword.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,7));
+		ItemAttributeList azombiesword = new ItemAttributeList();
+		azombiesword.add(0,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,1));
+		azombiesword.add(1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,2));
+		azombiesword.add(2,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,3));
+		azombiesword.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,3));
+		azombiesword.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,4));
+		azombiesword.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,4));
+		azombiesword.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,5));
+		azombiesword.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,5));
+		azombiesword.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,6));
+		azombiesword.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.DAMAGE_ALL,null,7));
 
-		azombiesword.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
-		azombiesword.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
-		azombiesword.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
-		azombiesword.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
-		azombiesword.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
-		azombiesword.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
-		azombiesword.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
+		azombiesword.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
+		azombiesword.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
+		azombiesword.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
+		azombiesword.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
+		azombiesword.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
+		azombiesword.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
+		azombiesword.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
 
-		azombiesword.add(0,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,1));
-		azombiesword.add(1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,1));
-		azombiesword.add(2,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,1));
-		azombiesword.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
-		azombiesword.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
-		azombiesword.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
-		azombiesword.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
-		azombiesword.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,3));
-		azombiesword.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,3));
-		azombiesword.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,3));
+		azombiesword.add(0,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,1));
+		azombiesword.add(1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,1));
+		azombiesword.add(2,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,1));
+		azombiesword.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
+		azombiesword.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
+		azombiesword.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
+		azombiesword.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,2));
+		azombiesword.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,3));
+		azombiesword.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,3));
+		azombiesword.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.KNOCKBACK,null,3));
 
-		azombiesword.add(0,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,1));
-		azombiesword.add(1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,2));
-		azombiesword.add(2,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,3));
-		azombiesword.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,3));
-		azombiesword.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,4));
-		azombiesword.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,4));
-		azombiesword.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,5));
-		azombiesword.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,5));
-		azombiesword.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,6));
-		azombiesword.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,7));
+		azombiesword.add(0,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,1));
+		azombiesword.add(1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,2));
+		azombiesword.add(2,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,3));
+		azombiesword.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,3));
+		azombiesword.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,4));
+		azombiesword.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,4));
+		azombiesword.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,5));
+		azombiesword.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,5));
+		azombiesword.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,6));
+		azombiesword.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.LOOT_BONUS_MOBS,null,7));
 		zombie.setSword(true, Equipment.SwordType.IRON, "§5Level $LEVEL Zombie Sword", "Obtained by killing a Zombie Boss",azombiesword);
 		
-		AttributeList azombiearmour = new AttributeList();
+		ItemAttributeList azombiearmour = new ItemAttributeList();
 		for(int i=0; i<5; i++){
-			azombiearmour.add(i,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.PROTECTION_ENVIRONMENTAL,null,i*2));
-			azombiearmour.add(i+1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.PROTECTION_ENVIRONMENTAL,null,i*2+1));
+			azombiearmour.add(i,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.PROTECTION_ENVIRONMENTAL,null,i*2));
+			azombiearmour.add(i+1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.PROTECTION_ENVIRONMENTAL,null,i*2+1));
 		}
 		zombie.setArmour(true, Equipment.ArmourType.TUNIC, Color.GREEN, "§5Level $LEVEL Zombie Armour", "Obtained by killing a Zombie Boss",azombiearmour);
 		BOSS_GEAR.put(Boss.Type.ZOMBIE,zombie);
 		
 		Equipment skeleton = new Equipment();
-		AttributeList askeletonbow = new AttributeList();
-		askeletonbow.add(0,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,1));
-		askeletonbow.add(1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,1));
-		askeletonbow.add(2,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,2));
-		askeletonbow.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,2));
-		askeletonbow.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,3));
-		askeletonbow.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,3));
-		askeletonbow.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,4));
-		askeletonbow.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,4));
-		askeletonbow.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,5));
-		askeletonbow.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,6));
+		ItemAttributeList askeletonbow = new ItemAttributeList();
+		askeletonbow.add(0,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,1));
+		askeletonbow.add(1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,1));
+		askeletonbow.add(2,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,2));
+		askeletonbow.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,2));
+		askeletonbow.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,3));
+		askeletonbow.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,3));
+		askeletonbow.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,4));
+		askeletonbow.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,4));
+		askeletonbow.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,5));
+		askeletonbow.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_DAMAGE,null,6));
 		
-		askeletonbow.add(0,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,1));
-		askeletonbow.add(1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,1));
-		askeletonbow.add(2,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,1));
-		askeletonbow.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
-		askeletonbow.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
-		askeletonbow.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
-		askeletonbow.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
-		askeletonbow.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,3));
-		askeletonbow.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,3));
-		askeletonbow.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,3));
+		askeletonbow.add(0,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,1));
+		askeletonbow.add(1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,1));
+		askeletonbow.add(2,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,1));
+		askeletonbow.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
+		askeletonbow.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
+		askeletonbow.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
+		askeletonbow.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,2));
+		askeletonbow.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,3));
+		askeletonbow.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,3));
+		askeletonbow.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_KNOCKBACK,null,3));
 		
 		for(int i=3; i<10; ++i){
-			askeletonbow.add(i,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_FIRE,null,1));
-			askeletonbow.add(i,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.ARROW_INFINITE,null,1));
+			askeletonbow.add(i,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_FIRE,null,1));
+			askeletonbow.add(i,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.ARROW_INFINITE,null,1));
 		}
 		skeleton.setBow(true,"§5Level $LEVEL Skeleton Bow","Obtained by killing a Skeleton Boss",askeletonbow);
 		
-		AttributeList askeletonarmour = new AttributeList();
+		ItemAttributeList askeletonarmour = new ItemAttributeList();
 		for(int i=0; i<10; ++i)
-			askeletonarmour.add(i,new Attribute(Attribute.Type.ATTRIBUTE,null,Attributes.Attribute.newBuilder().name("Knockback Resistance").type(Attributes.AttributeType.GENERIC_KNOCKBACK_RESISTANCE).amount((i+1)/10.0).build(),0));
+			askeletonarmour.add(i,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.KNOCKBACK_RESISTANCE,Operation.ADD_NUMBER,(i+1)/10.0),0));
 		skeleton.setArmour(true,Equipment.ArmourType.CAP,Color.WHITE,"§5Level $LEVEL Skeleton Helmet","Obtained by killing a Skeleton Boss",askeletonarmour);
 		BOSS_GEAR.put(Boss.Type.SKELETON,skeleton);
 		
 		Equipment spider = new Equipment();
-		AttributeList aspidersword = new AttributeList();
+		ItemAttributeList aspidersword = new ItemAttributeList();
 		for(int i=0; i<10; ++i)
-			aspidersword.add(i,new Attribute(Attribute.Type.VENOM_ASPECT,null,null,i>=6?2:1));
+			aspidersword.add(i,new ItemAttribute(ItemAttribute.Type.VENOM_ASPECT,null,null,i>=6?2:1));
 		spider.setSword(true,Equipment.SwordType.WOOD,"§5Level $LEVEL Spider Sword","Obtained by killing a Spider Boss",aspidersword);
 		
-		AttributeList aspiderarmour = new AttributeList();
-		Attributes.Attribute.Builder mov = Attributes.Attribute.newBuilder().name("Movement Speed").type(Attributes.AttributeType.GENERIC_MOVEMENT_SPEED).operation(Attributes.Operation.ADD_PERCENTAGE);
-		aspiderarmour.add(0,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.1).build(),0));
-		aspiderarmour.add(1,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.15).build(),0));
-		aspiderarmour.add(2,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.25).build(),0));
-		aspiderarmour.add(3,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.3).build(),0));
-		aspiderarmour.add(4,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.35).build(),0));
-		aspiderarmour.add(5,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.45).build(),0));
-		aspiderarmour.add(6,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.5).build(),0));
-		aspiderarmour.add(7,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.55).build(),0));
-		aspiderarmour.add(8,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.65).build(),0));
-		aspiderarmour.add(9,new Attribute(Attribute.Type.ATTRIBUTE,null,mov.amount(0.75).build(),0));
+		ItemAttributeList aspiderarmour = new ItemAttributeList();
+		aspiderarmour.add(0,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.1),0));
+		aspiderarmour.add(1,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.15),0));
+		aspiderarmour.add(2,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.25),0));
+		aspiderarmour.add(3,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.3),0));
+		aspiderarmour.add(4,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.35),0));
+		aspiderarmour.add(5,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.45),0));
+		aspiderarmour.add(6,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.5),0));
+		aspiderarmour.add(7,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.55),0));
+		aspiderarmour.add(8,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.65),0));
+		aspiderarmour.add(9,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MOVEMENT_SPEED,Operation.ADD_PERCENTAGE,0.75),0));
 		spider.setArmour(true,Equipment.ArmourType.PANTS,Color.TEAL,"§5Level $LEVEL Spider Legs","Obtained by killing a Spider Boss",aspiderarmour);
 		BOSS_GEAR.put(Boss.Type.SPIDER,spider);
 		
 		Equipment blaze = new Equipment();
-		AttributeList ablazesword = new AttributeList();
-		ablazesword.add(0,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
-		ablazesword.add(1,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
-		ablazesword.add(2,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
-		ablazesword.add(3,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
-		ablazesword.add(4,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
-		ablazesword.add(5,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
-		ablazesword.add(6,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
-		ablazesword.add(7,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
-		ablazesword.add(8,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
-		ablazesword.add(9,new Attribute(Attribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,4));
+		ItemAttributeList ablazesword = new ItemAttributeList();
+		ablazesword.add(0,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
+		ablazesword.add(1,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
+		ablazesword.add(2,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,1));
+		ablazesword.add(3,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
+		ablazesword.add(4,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
+		ablazesword.add(5,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,2));
+		ablazesword.add(6,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
+		ablazesword.add(7,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
+		ablazesword.add(8,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,3));
+		ablazesword.add(9,new ItemAttribute(ItemAttribute.Type.ENCHANTMENT,Enchantment.FIRE_ASPECT,null,4));
 		blaze.setSword(true,Equipment.SwordType.WOOD,"§5Level $LEVEL Blazing Sword","Obtained by killing a Blaze Boss",ablazesword);
 		
-		AttributeList ablazearmour = new AttributeList();
-		Attributes.Attribute.Builder hea = Attributes.Attribute.newBuilder().name("Maximum Health").type(Attributes.AttributeType.GENERIC_MAX_HEALTH);
+		ItemAttributeList ablazearmour = new ItemAttributeList();
 		for(int i=0; i<10; ++i)
-			ablazearmour.add(i,new Attribute(Attribute.Type.ATTRIBUTE,null,hea.amount((i+1)*2).build(),0));
+			ablazearmour.add(i,new ItemAttribute(ItemAttribute.Type.ATTRIBUTE,null,new Attribute(AttributeType.MAX_HEALTH,Operation.ADD_NUMBER,(i+1)*2),0));
 		blaze.setArmour(true,Equipment.ArmourType.BOOTS,Color.ORANGE,"§5Level $LEVEL Blazing Boots","Obtained by killing a Blaze Boss",ablazearmour);
 		BOSS_GEAR.put(Boss.Type.BLAZE,blaze);
 	}
@@ -494,8 +494,8 @@ public class Config {
 		
 	}
 	
-	private static AttributeList getAttributeList(ConfigurationSection section) {
-		AttributeList list = new AttributeList();
+	private static ItemAttributeList getAttributeList(ConfigurationSection section) {
+		ItemAttributeList list = new ItemAttributeList();
 		if(section.contains("enchants")){
 			ConfigurationSection enchants = section.getConfigurationSection("enchants");
 			Map<String, Object> map = enchants.getValues(false);
@@ -504,33 +504,33 @@ public class Config {
 				if(ench!=null || s.equalsIgnoreCase("venom_aspect")){
 					ConfigurationSection esect = enchants.getConfigurationSection(s);
 					if(ench!=null)
-						addAttributes(esect,list,Attribute.Type.ENCHANTMENT,ench,null);
+						addAttributes(esect,list,ItemAttribute.Type.ENCHANTMENT,ench,null,null);
 					else
-						addAttributes(esect,list,Attribute.Type.VENOM_ASPECT,null,null);
+						addAttributes(esect,list,ItemAttribute.Type.VENOM_ASPECT,null,null,null);
 				} else {
 					SurvivalImprovements.instance().getLogger().info("[Warning] Unknown enchantment "+s+". Skipping...");
 				}
 			}
 		}
 		for(String s : section.getValues(false).keySet()){
-			Attributes.AttributeType t = Attributes.AttributeType.valueOf(s);
+			AttributeType t = AttributeType.valueOf(s);
 			if(t!=null){
-				addAttributes(section.getConfigurationSection(s),list,Attribute.Type.ATTRIBUTE,null,Attributes.Attribute.newBuilder().operation(t.operation).type(t).name(t.name));
+				addAttributes(section.getConfigurationSection(s),list,ItemAttribute.Type.ATTRIBUTE,null,t,Util.attributeDefaultOperation(t));
 			}
 		}
 		return list;
 	}
 	
-	private static void addAttributes(ConfigurationSection section, AttributeList list, Attribute.Type type, Enchantment enchant, Attributes.Attribute.Builder attr){
+	private static void addAttributes(ConfigurationSection section, ItemAttributeList list, ItemAttribute.Type type, Enchantment enchant, AttributeType attrType, Operation attrOp){
 		Map<String, Object> m = section.getValues(false);
 		for(String l : m.keySet()){
 			try {
 				int level = Integer.parseInt(l)-1;
 				double value = section.getDouble(l);
-				if(type!=Attribute.Type.ATTRIBUTE)
-					list.add(level-1,new Attribute(type,enchant,null,(int)value));
+				if(type!=ItemAttribute.Type.ATTRIBUTE)
+					list.add(level-1,new ItemAttribute(type,enchant,null,(int)value));
 				else
-					list.add(level-1,new Attribute(type,null,attr.amount(value).build(),0));
+					list.add(level-1,new ItemAttribute(type,null,new Attribute(attrType,attrOp,value),0));
 			}catch(NumberFormatException ex){
 				SurvivalImprovements.instance().getLogger().info("[Warning] "+l+" is not a valid number. Skipping...");
 			}

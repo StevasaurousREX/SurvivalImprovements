@@ -16,13 +16,14 @@ public class GraveStone {
 	private Location loc;
 	private ItemStack[] contents;
 	private int timer;
-	private int time=Config.GRAVESTONE_SECONDS;
+	private int time;
 	private Sign sign;
 	private Player player;
 	
-	private GraveStone(Location loc, Player p, ItemStack[] items) throws IllegalArgumentException{
+	private GraveStone(Location loc, Player p, ItemStack[] items){
 		this.loc=loc;
 		this.contents=items;
+		time=Config.GRAVESTONE_SECONDS;
 		loc.getBlock().setType(Material.SIGN_POST);
 		sign = (Sign)loc.getBlock().getState();
 		sign.setLine(1,Config.GRAVESTONE_PLAYER_FORMAT+p.getName());

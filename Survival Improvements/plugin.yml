@@ -17,6 +17,8 @@ commands:
   attribute:
     description: Add an attribute to an item
     permission: survivalimprovements.attribute
+  market:
+    description: open the market.
 
 permissions:
   survivalimprovements.*:

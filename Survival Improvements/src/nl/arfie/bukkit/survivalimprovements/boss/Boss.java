@@ -4,7 +4,6 @@ import nl.arfie.bukkit.survivalimprovements.Config;
 import nl.arfie.bukkit.survivalimprovements.economy.Economy;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -16,15 +15,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
-import com.comphenix.example.Attributes;
 
 public class Boss {
 
@@ -64,10 +60,7 @@ public class Boss {
 		((LivingEntity)living).setCanPickupItems(false);
 		((LivingEntity)living).setRemoveWhenFarAway(false);
 		if(t==Type.ZOMBIE || t==Type.SKELETON)
-//			((LivingEntity)living).getEquipment().setItemInHand(weapon(t,level));
 			((LivingEntity)living).getEquipment().setItemInHand(Config.BOSS_GEAR.get(t).getWeaponForLevel(level));
-		if(t==Type.ZOMBIE || t==Type.SPIDER)
-			((LivingEntity)living).getEquipment().setHelmet(bossHelmet());
 		b.mob=living;
 		b.type=t;
 		b.level=level;
@@ -93,11 +86,10 @@ public class Boss {
 	public void killed(){
 		Player p = ((LivingEntity)mob).getKiller();
 		if(p!=null){
-//			int money=(int)(Math.min(15000.0,25*Math.pow(1.25,level))*type.multiplier);
-			int money=Config.BOSS_MONEY_AMOUNT.get(level);
-//			Bukkit.broadcastMessage(p.getDisplayName()+" has killed a §llevel "+(level+1)+" "+type.tag+"§f§r and received §c"+money+"§f gold!");
-			Bukkit.broadcastMessage(Config.MESSAGE_BOSS_DEFEAT.replaceAll("\\$PLAYER",p.getDisplayName()).replaceAll("\\$BOSS",(Config.ENABLE_BOSS_LEVELS?"level "+(level+1)+" ":"")+Config.BOSS_NAME_TAGS.get(type)).replaceAll("\\$MONEY",""+money));
-			Economy.addMoney(p.getName(),money);
+			double money=Config.BOSS_MONEY_AMOUNT.get(level);
+			if(Config.BROADCAST_BOSS_KILL)
+				Bukkit.broadcastMessage(Config.MESSAGE_BOSS_DEFEAT.replaceAll("\\$PLAYER",p.getDisplayName()).replaceAll("\\$BOSS",(Config.ENABLE_BOSS_LEVELS?"level "+(level+1)+" ":"")+Config.BOSS_NAME_TAGS.get(type)).replaceAll("\\$MONEY",String.format("%.2f",money)));
+			Economy.addMoney(p,money);
 		}
 		bosses.remove(this);
 	}
@@ -188,69 +180,6 @@ public class Boss {
 			}
 		}
 		return 0;
-	}
-	
-	public static ItemStack bossHelmet(){
-		ItemStack is = new ItemStack(Material.IRON_HELMET,1);
-		Attributes attributes = new Attributes(is);
-		attributes.add(Attributes.Attribute.newBuilder().name("Knockback Resistance").type(Attributes.AttributeType.GENERIC_KNOCKBACK_RESISTANCE).amount(1.0/3).build());
-		return attributes.getStack();
-	}
-	
-	@Deprecated
-	public static ItemStack bossArmour(Type type, int level){
-		switch(type){
-			case BLAZE:
-				ItemStack is = new ItemStack(Material.LEATHER_BOOTS,1);
-				LeatherArmorMeta im = (LeatherArmorMeta) is.getItemMeta();
-				im.setColor(Color.ORANGE);
-				im.setDisplayName("§5Level "+(level+1)+" Blazing Boots§f");
-				im.setLore(Arrays.asList(new String[]{"Obtained by killing a Blaze Boss"}));
-				im.addEnchant(Enchantment.PROTECTION_FIRE,2,true);
-				im.addEnchant(Enchantment.DURABILITY,3,true);
-				is.setItemMeta(im);
-				Attributes attr = new Attributes(is);
-				attr.add(Attributes.Attribute.newBuilder().name("Max Health").type(Attributes.AttributeType.GENERIC_MAX_HEALTH).amount(Math.min(20,4*(level+1))).build());
-				return(attr.getStack());
-
-			case SPIDER:
-				is = new ItemStack(Material.LEATHER_LEGGINGS,1);
-				im = (LeatherArmorMeta) is.getItemMeta();
-				im.setColor(Color.TEAL);
-				im.setDisplayName("§5Level "+(level+1)+" Spider Legs§f");
-				im.setLore(Arrays.asList(new String[]{"Obtained by killing a Spider Boss"}));
-				im.addEnchant(Enchantment.PROTECTION_EXPLOSIONS,2,true);
-				im.addEnchant(Enchantment.DURABILITY,3,true);
-				is.setItemMeta(im);
-				attr = new Attributes(is);
-				attr.add(Attributes.Attribute.newBuilder().name("Movement Speed").type(Attributes.AttributeType.GENERIC_MOVEMENT_SPEED).amount(level>3?0.75:0.25).operation(Attributes.Operation.ADD_PERCENTAGE).build());
-				return(attr.getStack());
-
-			case SKELETON:
-				is = new ItemStack(Material.LEATHER_HELMET,1);
-				im = (LeatherArmorMeta) is.getItemMeta();
-				im.setColor(Color.WHITE);
-				im.setDisplayName("§5Level "+(level+1)+" Skeleton Helmet§f");
-				im.setLore(Arrays.asList(new String[]{"Obtained by killing a Skeleton Boss"}));
-				im.addEnchant(Enchantment.PROTECTION_PROJECTILE,2,true);
-				im.addEnchant(Enchantment.DURABILITY,3,true);
-				is.setItemMeta(im);
-				attr = new Attributes(is);
-				attr.add(Attributes.Attribute.newBuilder().name("Knockback Resistance").type(Attributes.AttributeType.GENERIC_KNOCKBACK_RESISTANCE).amount(level>3?0.75:0.25).build());
-				return(attr.getStack());
-
-			case ZOMBIE:
-				is = new ItemStack(Material.LEATHER_CHESTPLATE,1);
-				im = (LeatherArmorMeta) is.getItemMeta();
-				im.setColor(Color.GREEN);
-				im.setDisplayName("§5Level "+(level+1)+" Zombie Armour§f");
-				im.setLore(Arrays.asList(new String[]{"Obtained by killing a Zombie Boss"}));
-				im.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,4,true);
-				im.addEnchant(Enchantment.DURABILITY,3,true);
-				is.setItemMeta(im);
-				return is;
-		}
-		return null;
 	}
 
 }

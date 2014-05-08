@@ -1,7 +1,7 @@
 package nl.arfie.bukkit.survivalimprovements.boss;
 
-import nl.arfie.bukkit.survivalimprovements.attribute.Attribute;
-import nl.arfie.bukkit.survivalimprovements.attribute.AttributeList;
+import nl.arfie.bukkit.survivalimprovements.attribute.ItemAttribute;
+import nl.arfie.bukkit.survivalimprovements.attribute.ItemAttributeList;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -31,9 +31,9 @@ public class Equipment {
 	}
 	
 	public ItemStack sword, bow, armour;
-	public AttributeList asword,abow,aarmour;
+	public ItemAttributeList asword,abow,aarmour;
 	
-	public void setSword(boolean enabled, SwordType type, String name, String lore, AttributeList attributes){
+	public void setSword(boolean enabled, SwordType type, String name, String lore, ItemAttributeList attributes){
 		if(enabled){
 			sword = new ItemStack(type.material,1);
 			ItemMeta meta = sword.getItemMeta();
@@ -47,7 +47,7 @@ public class Equipment {
 		}
 	}
 	
-	public void setBow(boolean enabled, String name, String lore, AttributeList attributes){
+	public void setBow(boolean enabled, String name, String lore, ItemAttributeList attributes){
 		if(enabled){
 			bow = new ItemStack(Material.BOW,1);
 			ItemMeta meta = bow.getItemMeta();
@@ -61,7 +61,7 @@ public class Equipment {
 		}
 	}
 	
-	public void setArmour(boolean enabled, ArmourType type, Color color, String name, String lore, AttributeList attributes){
+	public void setArmour(boolean enabled, ArmourType type, Color color, String name, String lore, ItemAttributeList attributes){
 		if(enabled){
 			armour = new ItemStack(type.material,1);
 			LeatherArmorMeta meta =  (LeatherArmorMeta)armour.getItemMeta();
@@ -85,9 +85,9 @@ public class Equipment {
 		
 		ns.setItemMeta(meta);
 		
-		HashSet<Attribute> attributes = asword.getAttributesForLevel(level);
+		HashSet<ItemAttribute> attributes = asword.getAttributesForLevel(level);
 		if(attributes!=null){
-			for(Attribute a : attributes)
+			for(ItemAttribute a : attributes)
 				ns = a.addToItemStack(ns);
 		}
 		return ns;
@@ -102,9 +102,9 @@ public class Equipment {
 		
 		ns.setItemMeta(meta);
 		
-		HashSet<Attribute> attributes = abow.getAttributesForLevel(level);
+		HashSet<ItemAttribute> attributes = abow.getAttributesForLevel(level);
 		if(attributes!=null){
-			for(Attribute a : attributes)
+			for(ItemAttribute a : attributes)
 				ns = a.addToItemStack(ns);
 		}
 		return ns;
@@ -119,9 +119,9 @@ public class Equipment {
 		
 		ns.setItemMeta(meta);
 		
-		HashSet<Attribute> attributes = aarmour.getAttributesForLevel(level);
+		HashSet<ItemAttribute> attributes = aarmour.getAttributesForLevel(level);
 		if(attributes!=null){
-			for(Attribute a : attributes)
+			for(ItemAttribute a : attributes)
 				ns = a.addToItemStack(ns);
 		}
 		return ns;
